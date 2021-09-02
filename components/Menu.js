@@ -31,25 +31,29 @@ let menuItems = [
 
   Step 6: Use 'menuMaker' to create a menu using the 'menuItems' array, and append the returned menu to the header.
 */
-const header = document.querySelector('.header');
-const menuButton = document.querySelector('menu-button');
+
+
 // menuButton.classList.add('menu-button');
-function menuMaker(menuItems) {
+function menuMaker() {
   //Assigning variables to elements
   const menuDiv = document.createElement("div");
   const menuList = document.createElement("ul");
-  const menuListItem = document.createElement("li");
 
   //assigning classes
-
   menuDiv.classList.add('menu');
-  menuListItem.textContent = menuItems;
 
   //set up structure of elements
   menuDiv.appendChild(menuList);
+
+  //assign array items to the li
+menuItems.forEach((item) => {
+  const menuListItem = document.createElement('li');
+  menuListItem.textContent = item;
   menuList.appendChild(menuListItem);
+ });
 
   //Added on click function to menubutton changing the Div class to Menu--open
+  const menuButton = document.querySelector('.menu-button');
   menuButton.addEventListener('click', () => {
     menuDiv.classList.toggle('menu--open')
   });
@@ -57,11 +61,6 @@ function menuMaker(menuItems) {
 return menuDiv;
 }
 
-//assign array items to the li
-menuItems.forEach(item => {
- const linkItem = menuMaker(item);
-  header.appendChild(linkItem)
-});
+const header = document.querySelector('.header');
 
-// header.appendChild(menuDiv);
-// menuItems.forEach((item)=> head.appenchChild(menuMaker(item)));
+menuItems.forEach((item)=> header.appendChild(menuMaker(item)));
